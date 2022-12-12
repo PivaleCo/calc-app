@@ -30,19 +30,27 @@
             type="number"
           />
 
-          <v-text-field
-            v-model="result"
-            label="Result"
-            filled
-            background-color="green"
-            type="number"
-            disabled
-          />
+          <p class="result-text">Result: <span :class="resultClass">{{ result }}</span></p>
         </v-card-text>
       </v-card>
     </v-col>
   </v-row>
 </template>
+
+<style scoped>
+.result-text {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+</style>
 
 <script>
 export default {
@@ -86,6 +94,12 @@ export default {
       }
 
       return null
+    },
+    resultClass () {
+      if (this.result === 0) {
+        return
+      }
+      return this.result > 0 ? 'positive' : 'negative'
     }
   }
 }
